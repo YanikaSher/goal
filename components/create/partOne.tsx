@@ -6,8 +6,9 @@ import { useAppSelector } from "@/redux/hooks";
 import MyPieChart from "./pieChart/pieChart";
 import { HashTagInput } from "./hashtag/hashtagInput";
 import { SelectPeriod } from "./selectPeriod/selectPeriodOfGoal";
-import { selectSelectPeriod } from "@/redux/features/selectPeriod/selectPeriodSlice";
+import { selectSelectPeriod } from "@/redux/features/select/periodSlice";
 import { selectChart } from "@/redux/features/chart/pieDataSlice";
+import { SelectModule } from "./selectModule/selectModule";
 
 const options = {
   responsive: true,
@@ -58,6 +59,7 @@ export function CreatePartOne() {
           }}
         />
       </div>
+      <SelectModule></SelectModule>
       <div className="flex-col mb-6 sm:flex-row md:flex-row lg:flex-row">
         <HashTagInput />
         <SelectPeriod/>
@@ -71,7 +73,7 @@ export function CreatePartOne() {
               tracker,
               periods,
               chart,
-              
+              moduleId: '1234'
             };
             fetch("http://localhost:5000/api/create/goal", {
               method: "POST",

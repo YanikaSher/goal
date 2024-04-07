@@ -8,7 +8,7 @@ import { ThunkDispatch } from "@reduxjs/toolkit";
 export const updateStateOfLabels = (
   arrOfAllParts: Array<number>,
   partOfDay: number,
-  label: string | undefined,
+  label: string,
   dispatch: ThunkDispatch<any, any, any>
 ) => {
   const freeTime = arrOfAllParts[0];

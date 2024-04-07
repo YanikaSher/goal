@@ -9,10 +9,8 @@ import {
   selectChartLabels,
 } from "@/redux/features/chart/pieDataSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { ThunkDispatch } from "@reduxjs/toolkit";
 import { updateStateOfLabels } from "./updateStateOfLabels";
 import { handleInput, isTimeUnique } from "./handleInput";
-import { defaultConfig } from "tailwind-variants";
 
 ChartJS.register(ArcElement, Legend, Tooltip);
 

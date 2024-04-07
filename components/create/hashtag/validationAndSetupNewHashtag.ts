@@ -7,6 +7,6 @@ export const validationAndSetupNewHashtag = (
 ) => {
   const removedSpacesStr = hashtagName.replace(/ /g, "");
   if (removedSpacesStr !== "") {
-    dispatch(add({ newHashtag: { name: removedSpacesStr, active: true } }));
+    dispatch(add({ name: removedSpacesStr, active: true } ));
   }
 };

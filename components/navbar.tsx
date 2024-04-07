@@ -33,10 +33,7 @@ import { Logo } from "@/components/icons";
 import { useState } from "react";
 import Cookies from "js-cookie";
 
-
-
 export const Navbar = () => {
-
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const router = useRouter();
 

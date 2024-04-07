@@ -2,11 +2,10 @@ import { Select, SelectItem } from "@nextui-org/react";
 import { goalSelections } from "./periods";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
-  ISelectPeriod,
   selectSelectPeriod,
   selectPeriod,
   selectDeadline,
-} from "@/redux/features/selectPeriod/selectPeriodSlice";
+} from "@/redux/features/select/periodSlice";
 
 export const SelectPeriod = () => {
   const dispatch = useAppDispatch();

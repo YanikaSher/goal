@@ -34,7 +34,7 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased overflow-hidden ",
           fontSans.variable
         )}
       >
@@ -42,7 +42,7 @@ export default function RootLayout({
           <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
             <div className="relative flex flex-col h-screen">
               <Navbar />
-              <main className="container mx-auto max-w-7xl px-3 sm:px-8 flex-grow">
+              <main className="container mx-auto max-w-7xl px-3 sm:px-8 flex-grow h-screen overflow-x-hidden overflow-y-scroll">
                 {children}
               </main>
               <footer className="w-full flex items-center justify-center py-3"></footer>
