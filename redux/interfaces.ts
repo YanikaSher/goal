@@ -1,24 +1,31 @@
-
-export interface IGoal {
-  trackers: Array<ITracker>;
-  periods: ISelectPeriod;
-  hashtags: Array<IHashtag>;
-  allocatedTime: IPieChart;
+export interface IGoalState {
+  trackers: Array<ITrackerState>;
+  periods: ISelectPeriodState;
+  hashtags: Array<IHashtagState>;
+  allocatedTime: IPieChartState;
 }
 
-
-export interface ITracker {
+export interface PayloadNewModule {
+  newModule: {
+    name: string;
+    description: string;
+    author: string;
+    id: string;
+    goals: any;
+  };
+}
+export interface ITrackerState {
   format: string;
   mode: string;
   name: string;
   id: string;
 }
 
-export interface ITrackerSwitch {
+export interface ITrackerSwitchState {
   isOpen: boolean;
 }
 
-export interface ISelectPeriod {
+export interface ISelectPeriodState {
   label: string;
   value: string;
   id: number;
@@ -26,11 +33,11 @@ export interface ISelectPeriod {
   deadlines: Array<string>;
   selectedDeadline: string;
 }
-export interface IHashtag {
+export interface IHashtagState {
   name: string;
   active: boolean;
 }
-export interface IPieChart {
+export interface IPieChartState {
   labels: Array<String>;
   datasets: [
     {

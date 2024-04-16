@@ -1,5 +1,5 @@
 "use client";
-import { ITracker } from "@/redux/interfaces";
+import { ITrackerState } from "@/redux/interfaces";
 import { RootState } from "@/redux/store";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
@@ -18,7 +18,7 @@ export const trackersSlice = createSlice({
   name: "tracker",
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<{tracker: ITracker}>) => {
+    add: (state, action: PayloadAction<{tracker: ITrackerState}>) => {
       state.trackers.unshift({ ...action.payload.tracker });
     },
     del: (state, action: PayloadAction<{targetId: string}>) => {

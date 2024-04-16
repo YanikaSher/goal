@@ -1,41 +1,26 @@
 "use client";
-import { selectModules, update } from "@/redux/features/module/module";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useEffect } from "react";
+// можно реализовать временное храненние данных профиля прям
+//на сайте в куках, чтобы постоянно не делать запрос на сервер
+//но делать постоянные обновления данных при их изменении соответственно
+import { requestModuleId } from "./request";
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
-
-export default function Page({ params }: { params: { slug: string } }) {
-  // const dispatch = useAppDispatch()
-  // const moduleAuthor = useAppSelector(selectModules);
-  const [module, setModule] = useState({name: '', description: '', id: '', author: '', goals: []})
+export default function GoalPage({
+  params,
+}: {
+  params: {
+    slug: string[];
+  };
+}) {
+  const sid = Cookies.get("connect.sid");
+  const url = "http://localhost:5000/api/get/module";
   useEffect(() => {
-    const sid = Cookies.get("connect.sid");
+    console.log(params.slug)
     if (sid) {
-      console.log("i have sid!!!");
-      fetch("http://localhost:5000/api/get/module", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          moduleSlugsInfo: params.slug,
-          sid: sid,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setModule(data)
-          console.log(data);
-        });
+      requestModuleId(url, sid, params);
     } else {
-      console.log("i havent sid((((");
+      console.log("sid отсутствует");
     }
   }, []);
-  return <div>
-    
-    {/* {module.goals.map((goal)=> (
-      <div key={goal.id}>{goal.name}</div>
-    ))} */}
-    
-    </div>;
+  return <div>SOme goal page hellooooooooooo{params.slug}</div>;
 }

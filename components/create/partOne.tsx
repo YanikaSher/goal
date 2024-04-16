@@ -9,6 +9,9 @@ import { SelectPeriod } from "./selectPeriod/selectPeriodOfGoal";
 import { selectSelectPeriod } from "@/redux/features/select/periodSlice";
 import { selectChart } from "@/redux/features/chart/pieDataSlice";
 import { SelectModule } from "./selectModule/selectModule";
+import { selectorSelectModule } from "@/redux/features/select/moduleSlice";
+import Cookies from "js-cookie";
+import { selectTrackers } from "@/redux/features/tracker/trackersSlice";
 
 const options = {
   responsive: true,
@@ -27,11 +30,12 @@ const options = {
 };
 
 export function CreatePartOne() {
-  const tracker: any = useAppSelector((state) => state.trackers);
+  const selectedModule = useAppSelector(selectorSelectModule);
+  const tracker = useAppSelector(selectTrackers);
   const [description, setDescription] = useState("");
-  const [nameGoal, setNameGoal] = useState("");
+  const [goalName, setGoalName] = useState("");
   const periods: any = useAppSelector(selectSelectPeriod);
-  const chart: any = useAppSelector(selectChart);
+  const chart = useAppSelector(selectChart);
   return (
     <div className="flex-1 px-3 ">
       <div className="w-full flex flex-col gap-4">
@@ -41,7 +45,7 @@ export function CreatePartOne() {
             variant={"underlined"}
             placeholder="Введите название цели"
             onInput={(event: any) => {
-              setNameGoal(event.target.value);
+              setGoalName(event.target.value);
             }}
           />
         </div>
@@ -59,21 +63,25 @@ export function CreatePartOne() {
           }}
         />
       </div>
-      <SelectModule></SelectModule>
+      <SelectModule />
+
       <div className="flex-col mb-6 sm:flex-row md:flex-row lg:flex-row">
         <HashTagInput />
-        <SelectPeriod/>
-        <MyPieChart options={options} />
+        <SelectPeriod />
 
+        <MyPieChart options={options} />
         <Button
           onClick={() => {
+            console.log(selectedModule);
+            console.log(chart.datasets);
             const data = {
-              description,
-              nameGoal,
+              selectedModuleID: selectedModule,
+             goal: { description,
+              goalName,
               tracker,
               periods,
-              chart,
-              moduleId: '1234'
+              chart,},
+              sid: Cookies.get("connect.sid")
             };
             fetch("http://localhost:5000/api/create/goal", {
               method: "POST",

@@ -15,6 +15,6 @@ export function updateModules(sid: string | undefined, dispatch: any, update: an
       })
       .catch((error) => console.log(error));
   } else {
-    console.log("нет кук");
+    console.log("нет кук utils/updateModules.ts");
   }
 }

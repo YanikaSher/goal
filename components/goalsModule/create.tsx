@@ -1,6 +1,6 @@
 "use client";
 
-import { update } from "@/redux/features/module/module";
+import { update } from "@/redux/features/goal/module";
 import { useAppDispatch } from "@/redux/hooks";
 import {
   Modal,

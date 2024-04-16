@@ -9,7 +9,7 @@ interface IAction {
     author: string;
   }>;
 }
-interface IState {
+interface IModule {
   modules: Array<{
     name: string;
     description: string;
@@ -17,7 +17,7 @@ interface IState {
     author: string;
   }>;
 }
-const initialState: IState = {
+const initialState: IModule = {
   modules: [],
 };
 

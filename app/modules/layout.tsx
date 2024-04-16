@@ -1,6 +1,6 @@
 import  PrivateRoute  from "@/components/auth/login/privateRoute";
 
-export default function GoalsLayout({
+export default function ModulesLayout({
   children,
 }: {
   children: React.ReactNode;

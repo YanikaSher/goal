@@ -6,8 +6,11 @@ import switchBtnReducer from "./features/tracker/switchSlice";
 import chartReducer from "./features/chart/pieDataSlice";
 import hashtagReducer from "./features/hashtag/hashtagSlice";
 import selectPeriodReducer from "./features/select/periodSlice";
+import selectModuleReducer from "./features/select/moduleSlice";
 import loginSuccessfulReducer from "./features/auth/loginSuccessful";
-import modulesReducer from "./features/module/module";
+import modulesReducer from "./features/goal/module";
+import goalsReducer from "./features/goal/goals";
+import goalReducer from "./features/goal/goal";
 
 export const store = configureStore({
   reducer: {
@@ -15,9 +18,12 @@ export const store = configureStore({
     charts: chartReducer,
     hashtags: hashtagReducer,
     selectPeriods: selectPeriodReducer,
-switchTracker: switchBtnReducer,
-loginSuccessful: loginSuccessfulReducer,
-modules: modulesReducer,
+    selectModule: selectModuleReducer,
+    switchTracker: switchBtnReducer,
+    loginSuccessful: loginSuccessfulReducer,
+    modules: modulesReducer,
+    goals: goalsReducer,
+    goal: goalReducer,
   },
 });
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ModalCreateModule } from "./create";
 import { useDisclosure } from "@nextui-org/react";
 import Cookies from "js-cookie";
-import { selectModules, update } from "@/redux/features/module/module";
+import { selectModules, update } from "@/redux/features/goal/module";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { updateModules } from "@/utils/updateModules";
 export const ModulesBoard = () => {
@@ -12,9 +12,9 @@ export const ModulesBoard = () => {
   const router = useRouter();
   const modules = useAppSelector(selectModules);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  
+
   useEffect(() => {
-    const sid = Cookies.get('connect.sid');
+    const sid = Cookies.get("connect.sid");
     updateModules(sid, dispatch, update);
   }, []);
   return (
@@ -48,9 +48,7 @@ export const ModulesBoard = () => {
             className="border-3 border-zinc-900 dark:border-zinc-300 rounded-lg h-auto w-32 sm:w-40 p-3 m-3 "
             key={module.name}
             onClick={() => {
-              console.log(module.id);
-              console.log(module.author);
-              router.push(`goals/${module.author}/${module.id}`);
+              router.push(`/modules/${module.author}/${module.id}`);
             }}
           >
             <div>

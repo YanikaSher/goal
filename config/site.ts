@@ -13,12 +13,12 @@ export const siteConfig = {
       href: "/links",
     },
     {
-      label: "Goals",
-      href: "/goals",
+      label: "My modules",
+      href: "/modules",
     },
     {
       label: "Common area",
-      href: "/commonarea",
+      href: "/common-area",
     },
     {
       label: "About",

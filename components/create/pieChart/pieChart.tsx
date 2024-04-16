@@ -17,8 +17,8 @@ ChartJS.register(ArcElement, Legend, Tooltip);
 const MyPieChart = ({ options }: any) => {
   const dispatch = useAppDispatch();
   const labels= useAppSelector(selectChartLabels);
-  const some = useAppSelector(selectChartData);
-  const someData = useAppSelector(selectChart);
+  const freeTime = useAppSelector(selectChartData);
+  const chart = useAppSelector(selectChart);
   // const [isPartSubmit, setBoolValueOfPart] = useState<boolean>(false)
   const [periodsOfTime, setPeriodOfTime]: any = useState([]);
   const [timeStart, setTimeStart] = useState("");
@@ -35,7 +35,7 @@ const MyPieChart = ({ options }: any) => {
         { start: timeStart, end: timeEnd },
       ]);
       const diffMilliseconds = Math.abs(start.diff(end));
-      updateStateOfLabels(some, diffMilliseconds, label, dispatch);
+      updateStateOfLabels(freeTime, diffMilliseconds, label, dispatch);
     } else {
       console.log(
         "Ошибка: одно из трех введенных значений не были введены или были введены некорректно!"
@@ -105,13 +105,13 @@ const MyPieChart = ({ options }: any) => {
       </div>
       <div className="h-36 w-36">
         <Pie
-          data={someData}
+          data={chart}
           options={options}
         />
       </div>
       <button
         onClick={() => {
-          console.log(some);
+          console.log(freeTime);
           console.log(labels);
           console.log(periodsOfTime);
         }}

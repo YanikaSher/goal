@@ -1,10 +1,10 @@
 "use client";
-import { IPieChart } from "@/redux/interfaces";
+import { IPieChartState } from "@/redux/interfaces";
 import { RootState } from "@/redux/store";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 
-const initialState: IPieChart = {
+const initialState = {
   labels: ["свободное время"],
   datasets: [
     {

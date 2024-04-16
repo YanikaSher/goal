@@ -2,7 +2,6 @@ import { add, del, selectHashtag } from "@/redux/features/hashtag/hashtagSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useState } from "react";
 import { validationAndSetupNewHashtag } from "./validationAndSetupNewHashtag";
-import { IHashtag } from "@/redux/interfaces";
 
 export const HashTagInput = () => {
   const dispatch = useAppDispatch();
