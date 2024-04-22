@@ -9,7 +9,7 @@ export const TrackerBoard = () => {
   return (
     <div className="flex flex-col">
        <p className="my-3 text-center  text-zinc-500 dark:text-zinc-400">
-        Создайте персональный трекер для лучшего прогресса
+        Создайте трекер для лучшего прогресса
       </p>
 
       <h1 className="text-xl text-center border-3 rounded-lg border-pink-600/20 dark:border-sky-600/20 font-medium text-pink-600 dark:text-sky-500 py-3">

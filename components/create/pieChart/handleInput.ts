@@ -8,12 +8,9 @@ export const handleInput = (
   time: string,
 ) => {
   if (!periodsOfTime[0]) {
-    console.log("what the fuck&");
     setTime(inputValue);
   } else {
     const isBetween = isTimeUnique(periodsOfTime, inputValue);
-    console.log(isBetween);
-
     if (isBetween) {
       setTime(inputValue);
     } else {

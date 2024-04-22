@@ -109,15 +109,7 @@ const MyPieChart = ({ options }: any) => {
           options={options}
         />
       </div>
-      <button
-        onClick={() => {
-          console.log(freeTime);
-          console.log(labels);
-          console.log(periodsOfTime);
-        }}
-      >
-        CLICK ME BITCH
-      </button>
+    
     </div>
   );
 };
