@@ -29,7 +29,6 @@ export interface ISelectPeriodState {
   label: string;
   value: string;
   id: number;
-  description: string;
   deadlines: Array<string>;
   selectedDeadline: string;
 }

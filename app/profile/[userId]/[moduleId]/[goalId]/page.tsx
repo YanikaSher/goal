@@ -3,9 +3,15 @@
 import { getProfile } from "@/app/profile/postFetch";
 import { useQuery } from "@tanstack/react-query";
 import Cookies from "js-cookie";
+import moment from "moment";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function Page({ params }: any) {
+  const now = moment();
+  const nowInFormat = now.format("DD.MM.YYYY");
+  console.log(nowInFormat);
+  console.log(now);
+  console.log("hello world");
   const currentPath = usePathname();
   const router = useRouter();
   const sessionId = Cookies.get("connect.sid");

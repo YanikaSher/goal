@@ -50,7 +50,10 @@ export default function Page({ params }: any) {
           {moduleData.goals.map((goal: any) => (
             <div key={goal.goalName}>
               <p>{goal.goalName}</p>
-              <button type="button" onClick={() => router.push(`${currentPath}/${goal.id}`)}>
+              <button
+                type="button"
+                onClick={() => router.push(`${currentPath}/${goal.id}`)}
+              >
                 Open
               </button>
             </div>

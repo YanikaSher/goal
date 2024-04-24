@@ -10,7 +10,6 @@ export const goalSelections = [
     label: "Краткосрочная цель",
     value: "Краткосрочная цель",
     id: 1,
-    description: "Kiss my ass my lover hover over day hight",
     deadlines: periods.short,
     selectedDeadline: '7'
   },
@@ -18,7 +17,6 @@ export const goalSelections = [
     label: "Среднесрочная цель",
     value: "Среднесрочная цель",
     id: 12,
-    description: "Kiss my ass my lover hover over day hight",
     deadlines: periods.medium,
     selectedDeadline: '91'
   },
@@ -26,7 +24,6 @@ export const goalSelections = [
     label: "Долгосрочная цель",
     value: "Долгосрочная цель",
     id: 123,
-    description: "Kiss my ass my lover hover over day hight",
     deadlines: periods.long,
     selectedDeadline: '365'
   },

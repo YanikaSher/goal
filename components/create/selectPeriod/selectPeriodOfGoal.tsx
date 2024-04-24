@@ -9,7 +9,7 @@ import {
 
 export const SelectPeriod = () => {
   const dispatch = useAppDispatch();
-  const periods: any = useAppSelector(selectSelectPeriod);
+  const periods = useAppSelector(selectSelectPeriod);
   return (
     <div>
       <Select
@@ -17,11 +17,12 @@ export const SelectPeriod = () => {
         className="sm:w-1/2 sm:pr-1 pb-3"
         color="default"
         radius="sm"
-        defaultSelectedKeys={[periods[0].value]}
+        defaultSelectedKeys={[periods.value]}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-          goalSelections.forEach((item) => {
-            if (item.value === event.target.value) {
-              dispatch(selectPeriod({ selectedPeriod: item }));
+          const selectedPeriodName = event.target.value;
+          goalSelections.forEach((period) => {
+            if (period.value === selectedPeriodName) {
+              dispatch(selectPeriod({ selectedPeriod: period }));
             }
           });
         }}
@@ -43,13 +44,14 @@ export const SelectPeriod = () => {
         color="default"
         radius="sm"
         defaultSelectedKeys={[
-          periods[0].selectedDeadline
+          periods.selectedDeadline
         ]}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-          dispatch(selectDeadline({ deadline: event.target.value }));
+          const selectedDeadline = event.target.value;
+          dispatch(selectDeadline({ deadline: selectedDeadline }));
         }}
       >
-        {periods[0].deadlines.map((period: string) => (
+        {periods.deadlines.map((period: string) => (
           <SelectItem
             textValue={period}
             value={period}
