@@ -4,7 +4,7 @@ import { RootState } from "@/redux/store";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 
-const initialState = {
+const initialState: IPieChartState = {
   labels: ["свободное время"],
   datasets: [
     {
@@ -37,6 +37,8 @@ const initialState = {
       borderWidth: 2,
     },
   ],
+  gaps: []
+
 };
 
 export const pieChartSlice = createSlice({
@@ -53,10 +55,13 @@ export const pieChartSlice = createSlice({
       state.datasets[0].data[0] = remainingFreeTime;
       state.datasets[0].data.push(action.payload.partOfDay);
     },
+    setupGaps: (state, action: PayloadAction<{gaps: string}>) => {
+      state.gaps.push(action.payload);
+    }
   },
 });
 
-export const { setupLabels, calculateFreeTime } = pieChartSlice.actions;
+export const { setupLabels, calculateFreeTime, setupGaps } = pieChartSlice.actions;
 export const selectChartData = (state: RootState) =>
   state.charts.datasets[0].data;
 export const selectChartLabels = (state: RootState) => state.charts.labels;

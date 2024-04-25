@@ -4,6 +4,7 @@ import { Textarea, Input } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 import { useAppSelector } from "@/redux/hooks";
 import moment from "moment";
+const uuid = require("uuid").v4;
 
 import MyPieChart from "./pieChart/pieChart";
 import { HashTagInput } from "./hashtag/hashtagInput";
@@ -36,8 +37,9 @@ export function CreatePartOne() {
   const tracker = useAppSelector(selectTrackers);
   const [description, setDescription] = useState("");
   const [goalName, setGoalName] = useState("");
-  const periods= useAppSelector(selectSelectPeriod);
+  const periods = useAppSelector(selectSelectPeriod);
   const chart = useAppSelector(selectChart);
+ 
   return (
     <div className="flex-1 px-3 ">
       <div className="w-full flex flex-col gap-4">
@@ -74,14 +76,16 @@ export function CreatePartOne() {
         <MyPieChart options={options} />
         <Button
           onClick={() => {
+            const id: string = uuid();
+
             const selectedDeadline = periods.selectedDeadline;
-            const nowDate = moment()
+            const nowDate = moment();
             const startDate = moment(nowDate, "DD.MM.YY");
-            const endDate = moment(nowDate, "DD.MM.YY")
-              .add(selectedDeadline, "days")
+            const endDate = moment(nowDate, "DD.MM.YY").add(
+              selectedDeadline,
+              "days"
+            );
             const dates = [];
-            console.log(startDate);
-            console.log(endDate);
             while (startDate.isBefore(endDate)) {
               dates.push({
                 dates: startDate.format("DD.MM.YYYY"),
@@ -89,7 +93,6 @@ export function CreatePartOne() {
               });
               startDate.add(1, "days");
             }
-            console.log(dates);
 
             const data = {
               selectedModuleID: selectedModule,
@@ -98,27 +101,28 @@ export function CreatePartOne() {
                 goalName,
                 tracker,
                 periods,
-                chartDatasets: chart.datasets,
+                chartDatasets: chart.datasets[0],
                 chartLabels: chart.labels,
                 abortAt: endDate,
                 dates,
+                id: id,
               },
               sid: Cookies.get("connect.sid"),
             };
             console.log(data);
-            // fetch("http://localhost:5000/api/create/goal", {
-            //   method: "POST",
-            //   headers: {
-            //     "Content-Type": "application/json",
-            //   },
-            //   body: JSON.stringify(data),
-            // })
-            //   .then((response) => {
-            //     return response.json();
-            //   })
-            //   .then((data: any) => {
-            //     console.log(data);
-            //   });
+            fetch("http://localhost:5000/api/create/goal", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            })
+              .then((response) => {
+                return response.json();
+              })
+              .then((data: any) => {
+                console.log(data);
+              });
           }}
         >
           Создать цель

@@ -47,4 +47,5 @@ export interface IPieChartState {
       borderWidth: number;
     }
   ];
+  gaps: Array<any>
 }

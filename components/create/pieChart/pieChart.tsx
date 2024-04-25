@@ -96,6 +96,7 @@ const MyPieChart = ({ options }: any) => {
             className=" border-gray-400/40 bg-gray-700/5 focus:outline-none focus:border-gray-600/60 rounded h-10 p-1 border-2"
           />
           <button
+          type="button"
             onClick={handleClick}
             className="px-3 rounded border-2 border-lime-500/40 h-10 bg-lime-400/40 hover:bg-lime-400/20 "
           >

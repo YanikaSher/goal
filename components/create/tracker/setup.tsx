@@ -18,8 +18,14 @@ export function TrackerSetup() {
     <div className="bg-lime-400/10 dark:bg-purple-800/20 rounded-sm p-3 mb-6">
       <Input
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          const inputValue = event.target.value; 
+          if (inputValue.trim()) {
+            setIsStringEmpty(false);
+          } else {
+            setIsStringEmpty(true);
+          }
           setName(event.target.value);
-        }}
+        }} 
         type="text"
         color="success"
         placeholder="Введите название трекера"
@@ -43,11 +49,8 @@ export function TrackerSetup() {
         <RadioGroup
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             const elem = event.target.value;
-            if (elem.trim()) {
-              setIsStringEmpty(true);
-            } else {
-              setIsStringEmpty(false);
-            }
+            console.log(elem)
+          
             setMode(event.target.value);
           }}
           className="mx-3 mb-3"
@@ -62,6 +65,7 @@ export function TrackerSetup() {
           type="button"
           className="rounded bg-zinc-600/80 text-white h-8 w-24 hover:bg-zinc-600/70 "
           onClick={() => {
+            console.log(isStringEmpty)
             const id: string = uuid();
             const tracker = {
               format: format,

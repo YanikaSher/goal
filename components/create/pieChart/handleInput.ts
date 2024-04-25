@@ -32,7 +32,7 @@ export const isTimeUnique = (
     const endTime = moment(item.end, "HH:mm");
     const inputTime = moment(inputValue, "HH:mm");
 
-    isBetween = inputTime.isBetween(endTime, startTime, undefined, "(]");
+    isBetween = inputTime.isBetween(startTime, endTime, undefined, "()");
   });
   return !isBetween;
 };

@@ -3,24 +3,25 @@
 import { useQuery } from "@tanstack/react-query";
 import { getOwner, getProfile } from "../postFetch";
 import Cookies from "js-cookie";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { ProfileInfo } from "@/components/profile/profileInfo";
 
 export default function Page({ params }: any) {
   const router = useRouter();
   const sessionId = Cookies.get("connect.sid");
   const {
-    data: whatTheFuck,
+    data: profileData,
     isLoading,
     isError,
     isSuccess,
     isFetched,
-  } = useQuery<any>({
+  } = useQuery<IUser>({
     queryKey: ["profile"],
     queryFn: async function () {
       try {
         const profileData = await getProfile(sessionId, params.userId);
         return profileData;
-      } catch (error: any) {
+      } catch (error) {
         console.log(error);
       }
     },
@@ -28,10 +29,11 @@ export default function Page({ params }: any) {
 
   if (isSuccess) {
     return (
-      <div>
-        <p>Profile name: {whatTheFuck.userName}</p>
+      <div className="p-profile-container">
+        <ProfileInfo profileData={profileData}/>
+       
         <div>
-          {whatTheFuck.modules.map((module: any) => (
+          {profileData.modules.map((module) => (
             <div className="flex flex-col" key={module.id}>
               <h2>-{module.name}</h2>
               <p>{module.description}</p>
