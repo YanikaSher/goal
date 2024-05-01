@@ -19,16 +19,7 @@ export const DisplayGoal = function ({ goal }: { goal: IGoal }) {
       </div>
 
       <TimeLine datasets={goal.chartDatasets}></TimeLine>
-      <button
-        type="button"
-        className="px-1 border-3 border-zinc-500/20 text-zinc-600 dark:text-zinc-400 dark:border-zinc-400/30 bg-zinc-600/20 rounded-lg my-2"
-        onClick={handleClick}
-      >
-        Смотреть описание {">"}
-      </button>
-      {isClicked ? (
         <ShowDescription descriptionText={goal.description} />
-      ) : null}
       <GoalTrackers trackers={goal.tracker}></GoalTrackers>
     </div>
   );

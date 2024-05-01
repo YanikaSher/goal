@@ -3,7 +3,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import trackerReducer from "./features/tracker/trackersSlice";
 import switchBtnReducer from "./features/tracker/switchSlice";
-import chartReducer from "./features/chart/pieDataSlice";
+import periodsReducer from "./features/period/periodsArray";
 import hashtagReducer from "./features/hashtag/hashtagSlice";
 import selectPeriodReducer from "./features/select/periodSlice";
 import selectModuleReducer from "./features/select/moduleSlice";
@@ -11,11 +11,13 @@ import loginSuccessfulReducer from "./features/auth/loginSuccessful";
 import modulesReducer from "./features/goal/module";
 import goalsReducer from "./features/goal/goals";
 import goalReducer from "./features/goal/goal";
+import periodReducer from "./features/period/period";
 
 export const store = configureStore({
   reducer: {
     trackers: trackerReducer,
-    charts: chartReducer,
+    periodsArray: periodsReducer,
+    period: periodReducer,
     hashtags: hashtagReducer,
     selectPeriods: selectPeriodReducer,
     selectModule: selectModuleReducer,

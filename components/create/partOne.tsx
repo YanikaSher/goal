@@ -6,31 +6,14 @@ import { useAppSelector } from "@/redux/hooks";
 import moment from "moment";
 const uuid = require("uuid").v4;
 
-import MyPieChart from "./pieChart/pieChart";
 import { HashTagInput } from "./hashtag/hashtagInput";
 import { SelectPeriod } from "./selectPeriod/selectPeriodOfGoal";
 import { selectSelectPeriod } from "@/redux/features/select/periodSlice";
-import { selectChart } from "@/redux/features/chart/pieDataSlice";
 import { SelectModule } from "./selectModule/selectModule";
 import { selectorSelectModule } from "@/redux/features/select/moduleSlice";
 import Cookies from "js-cookie";
 import { selectTrackers } from "@/redux/features/tracker/trackersSlice";
-
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "bottom",
-      maxHeight: 50,
-      onClick: (e: any, legendItem: any, legend: any) => {
-        // e.preventDefault();
-        console.log("legend");
-        console.log(legendItem);
-        console.log(legend);
-      },
-    },
-  },
-};
+import { SelectTimePeriods } from "./selectTimePeriods";
 
 export function CreatePartOne() {
   const selectedModule = useAppSelector(selectorSelectModule);
@@ -38,7 +21,6 @@ export function CreatePartOne() {
   const [description, setDescription] = useState("");
   const [goalName, setGoalName] = useState("");
   const periods = useAppSelector(selectSelectPeriod);
-  const chart = useAppSelector(selectChart);
  
   return (
     <div className="flex-1 px-3 ">
@@ -73,7 +55,7 @@ export function CreatePartOne() {
         <HashTagInput />
         <SelectPeriod />
 
-        <MyPieChart options={options} />
+        <SelectTimePeriods />
         <Button
           onClick={() => {
             const id: string = uuid();
@@ -101,8 +83,6 @@ export function CreatePartOne() {
                 goalName,
                 tracker,
                 periods,
-                chartDatasets: chart.datasets[0],
-                chartLabels: chart.labels,
                 abortAt: endDate,
                 dates,
                 id: id,

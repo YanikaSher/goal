@@ -1,4 +1,4 @@
-import { IHashtag } from "@/redux/interfaces";
+import { IHashtagState } from "@/redux/interfaces";
 import { RootState } from "@/redux/store";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
@@ -11,16 +11,16 @@ export const hashtagSlice = createSlice({
   name: "hashtag",
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<IHashtag>) => {
-      state.hashtags.forEach((item: IHashtag, index) => {
+    add: (state, action: PayloadAction<IHashtagState>) => {
+      state.hashtags.forEach((item: IHashtagState, index) => {
         if (item.name === action.payload.name) {
           state.hashtags.splice(index, 1);
         }
       });
       state.hashtags.push(action.payload);
     },
-    del: (state, action: PayloadAction<IHashtag>)=> {
-      state.hashtags.forEach((item: IHashtag, index) => {
+    del: (state, action: PayloadAction<IHashtagState>)=> {
+      state.hashtags.forEach((item: IHashtagState, index) => {
         if (item.name === action.payload.name) {
           state.hashtags.splice(index, 1);
         }
