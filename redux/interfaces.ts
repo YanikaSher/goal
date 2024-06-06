@@ -16,7 +16,6 @@ export interface PayloadNewModule {
 }
 export interface ITrackerState {
   format: string;
-  mode: string;
   name: string;
   id: string;
 }

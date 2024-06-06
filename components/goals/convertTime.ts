@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export function somed(time: string, inputTime: string) {
+export function getTimePlace(time: string, inputTime: string) {
   const momentInputTime = moment(inputTime, "HH:mm");
   const minTime = moment(time, "HH:mm");
   const maxTime = moment(time, "HH:mm").add(1, 'hours');

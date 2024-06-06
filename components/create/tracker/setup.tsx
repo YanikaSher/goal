@@ -6,26 +6,28 @@ import { selectTrackers, add } from "@/redux/features/tracker/trackersSlice";
 const uuid = require("uuid").v4;
 
 import { useState } from "react";
+import { trackerSettings } from "./settings";
 
 export function TrackerSetup() {
   const dispatch = useAppDispatch();
   const [isStringEmpty, setIsStringEmpty] = useState(false);
-  const [format, setFormat] = useState("text");
-  const [name, setName] = useState("Вести запись каждого дня");
-  const [mode, setMode] = useState("free");
+  const [characters, setCharacters] = useState<20 | 50 | 100 | 300 | 1000>(20);
+  const [format, setFormat] = useState<"text" | "number" | "checkbox">("text");
+  const [name, setName] = useState<string>("Вести запись каждого дня");
+  const [mode, setMode] = useState<any>("");
   const trackers: any = useAppSelector(selectTrackers);
   return (
-    <div className="bg-lime-400/10 dark:bg-purple-800/20 rounded-sm p-3 mb-6">
+    <div className="bg-lime-400/10 flex flex-col dark:bg-purple-800/20 rounded-sm p-3 mb-6">
       <Input
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          const inputValue = event.target.value; 
+          const inputValue = event.target.value;
           if (inputValue.trim()) {
             setIsStringEmpty(false);
           } else {
             setIsStringEmpty(true);
           }
           setName(event.target.value);
-        }} 
+        }}
         type="text"
         color="success"
         placeholder="Введите название трекера"
@@ -34,49 +36,78 @@ export function TrackerSetup() {
         className="w-100 mb-3 px-2"
         value={name}
       ></Input>
-      <div className="rounded mb-3 flex flex-col sm:flex-row">
+      <div className="rounded mb-3 w-full flex flex-col sm:flex-row">
         <RadioGroup
-          defaultValue={mode}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setFormat(event.target.value);
+            const formatInputVale = event.target.value as
+              | "text"
+              | "number"
+              | "checkbox";
+            setFormat(formatInputVale);
+            setMode('')
           }}
           className="mb-3"
           label="Выберете формат трекера"
         >
-          <Radio value="text">Текст</Radio>
-          <Radio value="file">Файл</Radio>
+          {trackerSettings.map((tracker) => (
+            <Radio key={tracker.format} value={tracker.format}>
+              {tracker.format}
+            </Radio>
+          ))}
         </RadioGroup>
-        <RadioGroup
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const elem = event.target.value;
-            console.log(elem)
-          
-            setMode(event.target.value);
-          }}
-          className="mx-3 mb-3"
-          label="Выберите режим трекера"
-        >
-          <Radio value="strict">Строгий</Radio>
-          <Radio value="free">Свободный</Radio>
-        </RadioGroup>
+        {format === "text" ? (
+          <RadioGroup
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              const elem = event.target.value;
+              setMode(event.target.value);
+            }}
+            className="mx-3 mb-3"
+            label="Выберите количество символов"
+          >
+            <div className="*:mr-2">
+              <Radio value="20">sm (20)</Radio>
+              <Radio value="50">md (50)</Radio>
+              <Radio value="100">lg (100)</Radio>
+            </div>
+            <div className="*:mr-2">
+              <Radio value="300">xl (300)</Radio>
+              <Radio value="1000">3xl (1000)</Radio>
+            </div>
+          </RadioGroup>
+        ) : null}
+        {format === "number" ? (
+          <RadioGroup
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              const elem = event.target.value;
+              setMode(event.target.value);
+            }}
+            className="mx-3 mb-3"
+            label="Выберите в чем можно рассчитать"
+          >
+            <div className="*:mr-2">
+              <Radio value="percentage">проценты %</Radio>
+              <Radio value="weight">вес в кило kg</Radio>
+            </div>
+            <div className="*:mr-2">
+              <Radio value="calories">калории kal</Radio>
+              <Radio value="custom">своя величина</Radio>
+            </div>
+          </RadioGroup>
+        ) : null}
       </div>
       <center>
         <button
           type="button"
           className="rounded bg-zinc-600/80 text-white h-8 w-24 hover:bg-zinc-600/70 "
           onClick={() => {
-            console.log(isStringEmpty)
             const id: string = uuid();
             const tracker = {
               format: format,
               name: name,
-              mode: mode,
               id: id,
             };
             if (!isStringEmpty) {
               dispatch(add({ tracker: tracker }));
-              console.log(trackers);
-              console.log(tracker);
             }
           }}
         >

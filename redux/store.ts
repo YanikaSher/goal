@@ -12,6 +12,7 @@ import modulesReducer from "./features/goal/module";
 import goalsReducer from "./features/goal/goals";
 import goalReducer from "./features/goal/goal";
 import periodReducer from "./features/period/period";
+import isOwnerReducer from "./features/goal/isOwner";
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     modules: modulesReducer,
     goals: goalsReducer,
     goal: goalReducer,
+    isOwner: isOwnerReducer,
   },
 });
 

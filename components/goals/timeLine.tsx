@@ -1,12 +1,6 @@
 import moment from "moment";
-import { somed } from "./convertTime";
-const periods = [
-  { startPeriod: "08:00", endPeriod: "10:00" },
-  { startPeriod: "18:10", endPeriod: "22:32" },
-  { startPeriod: "03:10", endPeriod: "08:00" },
-  // {startPeriod: '08:10', endPeriod: '10:44'},
-  // {startPeriod: '08:10', endPeriod: '10:44'},
-];
+import { getTimePlace } from "./convertTime";
+
 const time = [
   "00:00",
   "01:00",
@@ -33,9 +27,22 @@ const time = [
   "22:00",
   "23:00",
 ];
-export const TimeLine = function ({ datasets }: { datasets: IDataSets }) {
+export const TimeLine = function ({ timePeriods }: { timePeriods: any[] }) {
   return (
     <div className="flex flex-col">
+      <div className="flex">
+        {time.map((time: string, index: number) => (
+          <div
+            className="flex justify-center items-center h-8"
+            style={{
+              width: `4.16%`,
+            }}
+            key={index}
+          >
+            {moment(time, "HH:mm").format("HH")}
+          </div>
+        ))}
+      </div>
       <div className="flex rounded-md ">
         {time.map((time: string, index: number) => (
           <div
@@ -45,11 +52,12 @@ export const TimeLine = function ({ datasets }: { datasets: IDataSets }) {
             }}
             key={index}
           >
-            {periods.map((period) =>
-              somed(time, period.startPeriod) ? (
-                <div key={time}>{"|"}</div>
-              ) : null
-            )}
+            {timePeriods &&
+              timePeriods.map((period) =>
+                getTimePlace(time, period.startPeriod) ? (
+                  <div key={time}>{"|"}</div>
+                ) : null
+              )}
           </div>
         ))}
       </div>
@@ -62,7 +70,7 @@ export const TimeLine = function ({ datasets }: { datasets: IDataSets }) {
             }}
             key={index}
           >
-            {somed(time, moment().format("HH:mm")) ? (
+            {getTimePlace(time, moment().format("HH:mm")) ? (
               <div className=" text-red-600" key={time}>
                 {"|"}
               </div>
@@ -79,9 +87,17 @@ export const TimeLine = function ({ datasets }: { datasets: IDataSets }) {
             }}
             key={index}
           >
-            {periods.map((period) =>
-              somed(time, period.endPeriod) ? <div className="bg-sky-500/30 w-full h-full flex justify-center" key={time}>{"|"}</div> : null
-            )}
+            {timePeriods &&
+              timePeriods.map((period) =>
+                getTimePlace(time, period.endPeriod) ? (
+                  <div
+                    className="bg-sky-500/30 w-full h-full flex justify-center"
+                    key={time}
+                  >
+                    {"|"}
+                  </div>
+                ) : null
+              )}
           </div>
         ))}
       </div>

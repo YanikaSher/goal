@@ -8,11 +8,7 @@ export const TrackerBoard = () => {
   const trackers = useAppSelector(selectTrackers);
   return (
     <div className="flex flex-col">
-      <p className="my-3 text-center  text-zinc-500 dark:text-zinc-400">
-        Создайте трекер для лучшего прогресса
-      </p>
-
-      <h1 className="text-xl text-center border-3 rounded-lg border-pink-600/20 dark:border-sky-600/20 font-medium text-pink-600 dark:text-sky-500 py-3">
+      <h1 className="text-xl text-center border-b-2 dark:border-sky-600/20 font-medium text-pink-600 dark:text-sky-500 py-3">
         Доска трекеров
       </h1>
 
@@ -20,10 +16,10 @@ export const TrackerBoard = () => {
 
       <TrackerSwitch />
 
-      <div className="snap-y bg-pink-600/10 dark:bg-sky-600/20 place-content-center rounded p-4 h-200">
+      <div className="snap-y bg-sky-600/20 place-content-center rounded p-4 h-200">
         {trackers.map((tracker) => (
           <div
-            className="flex bg-pink-600/20 p-2 rounded-l border-sky-600 mb-2 border-r-3 justify-between dark:bg-sky-600/20 items-center"
+            className="flex p-2 rounded-l border-sky-600 mb-2 border-r-3 justify-between bg-sky-600/20 items-center"
             key={tracker.id}
           >
             <p>{tracker.name}</p>
@@ -43,7 +39,7 @@ export const TrackerBoard = () => {
             </button>
           </div>
         ))}
-        {trackers.length > 2 ? null : <PseudoMandatoryTrackerGroup />}
+        {trackers.length > 1 ? null : <PseudoMandatoryTrackerGroup />}
       </div>
     </div>
   );

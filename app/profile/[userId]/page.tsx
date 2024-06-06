@@ -1,14 +1,18 @@
 "use client";
 
+const uuid = require("uuid").v4;
+
 import { useQuery } from "@tanstack/react-query";
-import { getOwner, getProfile } from "../postFetch";
+import { getProfile } from "../postFetch";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { ProfileInfo } from "@/components/profile/profileInfo";
+import { CreateModuleModal } from "@/components/profile/createModuleModal";
 
 export default function Page({ params }: any) {
   const router = useRouter();
   const sessionId = Cookies.get("connect.sid");
+
   const {
     data: profileData,
     isLoading,
@@ -30,15 +34,16 @@ export default function Page({ params }: any) {
   if (isSuccess) {
     return (
       <div className="p-profile-container">
-        <ProfileInfo profileData={profileData}/>
-       
+        <ProfileInfo profileData={profileData} />
+
         <div>
+          <CreateModuleModal />
           {profileData.modules.map((module) => (
             <div className="flex flex-col" key={module.id}>
-              <h2>-{module.name}</h2>
+              <h2 className=" font-bold text-sky-600">{module.name}</h2>
               <p>{module.description}</p>
               <button
-                className=" border-2 rounded"
+                className=" mt-2 p-1 bg-zinc-400/10 rounded hover:bg-zinc-400/20"
                 type="button"
                 onClick={() => {
                   router.push(`/profile/${params.userId}/${module.id}`);
@@ -49,6 +54,7 @@ export default function Page({ params }: any) {
             </div>
           ))}
         </div>
+        <center></center>
       </div>
     );
   }

@@ -9,37 +9,24 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Useful links",
-      href: "/links",
-    },
-    {
-      label: "My modules",
-      href: "/modules",
+      label: "Profile",
+      href: "/profile",
     },
     {
       label: "Common area",
       href: "/common-area",
     },
     {
-      label: "About",
-      href: "/about",
-    },
+      label: "Modules",
+      href: "/modules"
+    }
+
   ],
   navMenuItems: [
     {
       label: "Profile",
       href: "/profile",
     },
-    {
-      label: "Statistic",
-      href: "/Statistic",
-    },
-    
-    {
-      label: "Settings",
-      href: "/settings",
-    },
-    
     {
       label: "Logout",
       href: "/logout",

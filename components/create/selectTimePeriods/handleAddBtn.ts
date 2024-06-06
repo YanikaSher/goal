@@ -27,7 +27,7 @@ export function isPeriodCompleted(
     period.startPeriod &&
     period.name &&
     !isPeriodSame &&
-    !isPeriodShort,
+    !isPeriodShort &&
     isStartLess
   ) {
     return true;

@@ -1,27 +1,31 @@
 // "use client";
 import React, { useState } from "react";
+import Cookies from "js-cookie";
+
+const uuid = require("uuid").v4;
+
 import { Textarea, Input } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 import { useAppSelector } from "@/redux/hooks";
-import moment from "moment";
-const uuid = require("uuid").v4;
 
 import { HashTagInput } from "./hashtag/hashtagInput";
 import { SelectPeriod } from "./selectPeriod/selectPeriodOfGoal";
 import { selectSelectPeriod } from "@/redux/features/select/periodSlice";
 import { SelectModule } from "./selectModule/selectModule";
 import { selectorSelectModule } from "@/redux/features/select/moduleSlice";
-import Cookies from "js-cookie";
 import { selectTrackers } from "@/redux/features/tracker/trackersSlice";
 import { SelectTimePeriods } from "./selectTimePeriods";
+import { getArrayOfPeriods } from "./getArrayOfPeriods";
+import { selectorPeriodsArray } from "@/redux/features/period/periodsArray";
 
 export function CreatePartOne() {
   const selectedModule = useAppSelector(selectorSelectModule);
-  const tracker = useAppSelector(selectTrackers);
+  const trackers = useAppSelector(selectTrackers);
   const [description, setDescription] = useState("");
   const [goalName, setGoalName] = useState("");
   const periods = useAppSelector(selectSelectPeriod);
- 
+  const timePeriods = useAppSelector(selectorPeriodsArray);
+
   return (
     <div className="flex-1 px-3 ">
       <div className="w-full flex flex-col gap-4">
@@ -57,35 +61,19 @@ export function CreatePartOne() {
 
         <SelectTimePeriods />
         <Button
-          onClick={() => {
+          onClick={async () => {
             const id: string = uuid();
-
-            const selectedDeadline = periods.selectedDeadline;
-            const nowDate = moment();
-            const startDate = moment(nowDate, "DD.MM.YY");
-            const endDate = moment(nowDate, "DD.MM.YY").add(
-              selectedDeadline,
-              "days"
-            );
-            const dates = [];
-            while (startDate.isBefore(endDate)) {
-              dates.push({
-                dates: startDate.format("DD.MM.YYYY"),
-                isCompleted: false,
-              });
-              startDate.add(1, "days");
-            }
-
+            const dates = getArrayOfPeriods(periods.selectedDeadline);
             const data = {
               selectedModuleID: selectedModule,
               goal: {
                 description,
                 goalName,
-                tracker,
                 periods,
-                abortAt: endDate,
                 dates,
-                id: id,
+                id,
+                trackers,
+                timePeriods,
               },
               sid: Cookies.get("connect.sid"),
             };
@@ -98,10 +86,17 @@ export function CreatePartOne() {
               body: JSON.stringify(data),
             })
               .then((response) => {
-                return response.json();
+                if (response.ok) {
+                  console.log(response)
+                }
+                console.log(response)
+
+                return response.json()})
+              .then((date) => {
+                console.log(date);
               })
-              .then((data: any) => {
-                console.log(data);
+              .catch((error) => {
+                console.log(error);
               });
           }}
         >

@@ -6,10 +6,10 @@ import Cookies from "js-cookie";
 import { useRouter, usePathname } from "next/navigation";
 import { ShowDescription } from "@/components/goals/showDescription";
 import { GoalsList } from "@/components/goals/goalsList";
+import { EmptyGoalList } from "@/components/goals/emptyGoalList";
+import { Button, Link } from "@nextui-org/react";
 
 export default function Page({ params }: any) {
-  const currentPath = usePathname();
-  const router = useRouter();
   const sessionId = Cookies.get("connect.sid");
   const profileId = Cookies.get("profile_id");
   const { data, isLoading, isError, isSuccess, isFetched } = useQuery<IUser>({
@@ -36,8 +36,25 @@ export default function Page({ params }: any) {
             {moduleData.name}
           </h2>
         </div>
-        <ShowDescription descriptionText={moduleData.description}></ShowDescription>
-        <GoalsList goals={moduleData.goals}></GoalsList>
+        <ShowDescription
+          descriptionText={moduleData.description}
+        ></ShowDescription>
+        {moduleData.goals.length === 0 ? (
+          <EmptyGoalList />
+        ) : (
+          <GoalsList goals={moduleData.goals} />
+        )}
+        <Button
+          as={Link}
+          size="md"
+          href="/create"
+          className="p-create-goal-href w-32 mt-3"
+          type="button"
+          variant="ghost"
+          color="success"
+        >
+          Создать цель
+        </Button>
       </div>
     );
   }

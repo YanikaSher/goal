@@ -7,16 +7,10 @@ interface IModule {
 }
 
 interface IGoal {
-  description: string;
-  goalName: string;
-  tracker: Array<any>;
-  periods: Object;
-  chartDatasets: IDataSets;
-
-  chartLabels: Array<any>;
-  abortAt: string;
-  dates: Array<string>;
-  id: string;
+  goalName: string,
+  description: string,
+  id: string,
+  ref: string,
 }
 
 interface IDataSets {
