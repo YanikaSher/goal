@@ -7,11 +7,11 @@ import {
   PopoverContent,
 } from "@nextui-org/react";
 
-export function PopupWithConstantsForTheFormula() {
+export function PopupWithConstants() {
   return (
     <Popover key={"constants"} placement="bottom" color={"foreground"}>
       <PopoverTrigger>
-        <Button color={"primary"} className="capitalize">
+        <Button color={"primary"} className="capitalize w-10">
           Константы
         </Button>
       </PopoverTrigger>

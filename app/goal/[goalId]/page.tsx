@@ -15,7 +15,8 @@ import { useEffect, useState } from "react";
 import { getGoal } from "./getGoal";
 import { isOwnerSelector, setIsOwner } from "@/redux/features/goal/isOwner";
 import { GoalTrackers } from "@/components/goals/trackers/list";
-import { GoalAchievements } from "@/components/goals/achievements";
+import { GoalTools } from "@/components/goals/formula/tools";
+import { ShowFormula } from "@/components/goals/formula/showFormula";
 
 export interface ILessGoalInfo {
   goalName: string;
@@ -42,13 +43,13 @@ export default function Page({ params }: { params: { goalId: string } }) {
   const [selected, setSelected] = useState<any>("base-info");
   const isOwner = useAppSelector(isOwnerSelector);
   const dispatch = useAppDispatch();
-  
+
   const sessionId = Cookies.get("connect.sid");
   const goalId = params.goalId;
-  useEffect(()=> {
+  useEffect(() => {
     const selectedTab = sessionStorage.getItem("defaultSelectedTab");
-    setSelected(selectedTab ?? 'base-info')
-  }, [])
+    setSelected(selectedTab ?? "base-info");
+  }, []);
 
   const { data, isLoading, isError, isSuccess, isFetched } = useQuery<
     ILessGoalInfo | IFullGoalInfo
@@ -70,9 +71,9 @@ export default function Page({ params }: { params: { goalId: string } }) {
   });
   if (isSuccess) {
     return (
-      <div className="p-goal-page w-full">
-        <div className="flex flex-col mb-4 p-2 w-full">
-          <h2 className="text-2xl self-start font-medium">
+      <div className="p-goal-page w-full h-full">
+        <div className="flex flex-col mb-4 p-2 w-full h-1/6">
+          <h2 className="text-2xl self-start font-medium h-full">
             {data.goalName === ""
               ? "Цель без названия и много другого текста супер пупер дупер"
               : data.goalName}
@@ -86,29 +87,42 @@ export default function Page({ params }: { params: { goalId: string } }) {
               sessionStorage.setItem("defaultSelectedTab", key);
               setSelected(key);
             }}
-            className="w-full self-center justify-self-center"
+            className="w-full self-center justify-self-center h-1/6"
           >
-            <Tab key="achievements" title="achievements" className="w-full">
-              <Card className="w-full">
-                <CardBody className="w-full">
-                  <GoalAchievements dates={(data as IFullGoalInfo).dates} />
+            <Tab key="tools" title="tools" className="w-full h-4/6">
+            <Card className="mb-4">
+                <CardBody>
+                  <ShowFormula goal={data} />
+                </CardBody>
+              </Card>
+              <Card className="w-full h-full">
+                <CardBody className="w-full h-full ">
+                  <GoalTools dates={(data as IFullGoalInfo).dates} />
                 </CardBody>
               </Card>
             </Tab>
-            <Tab key="base-info" title="base info">
+            <Tab key="base-info" title="base info" className="w-full h-4/6">
               <Card>
                 <CardBody>
                   <DisplayFullGoal goal={data as IFullGoalInfo} />
                 </CardBody>
               </Card>
             </Tab>
-            <Tab key="trackers" title="trackers">
+            <Tab key="trackers" title="trackers" className="w-full h-4/6">
+             
               <Card>
                 <CardBody>
                   <GoalTrackers goal={data} />
                 </CardBody>
               </Card>
             </Tab>
+            {/* <Tab  key="formula" title="formula" className="w-full h-4/6">
+              <Card>
+                <CardBody>
+
+                </CardBody>
+              </Card>
+            </Tab> */}
           </Tabs>
         ) : (
           <DisplayLessGoal goal={data as ILessGoalInfo} />

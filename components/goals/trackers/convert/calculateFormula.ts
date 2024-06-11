@@ -1,6 +1,7 @@
 import { evaluate } from "mathjs";
 
-export function calculateFormula(arrFormula: string[], constants: any) {
+export function calculateFormula(strFormula: string, constants: any) {
+  const arrFormula = strFormula.split(" ");
   const newArrFormula = [...arrFormula];
   for (let i = 0; i < newArrFormula.length; i++) {
     if (newArrFormula[i] in constants) {
@@ -10,7 +11,7 @@ export function calculateFormula(arrFormula: string[], constants: any) {
   const stringFormula = newArrFormula.join(" ");
   try {
     const expression = evaluate(stringFormula);
-    return expression;
+    return expression.toFixed(1);
   } catch (error) {
     console.log(error);
   }

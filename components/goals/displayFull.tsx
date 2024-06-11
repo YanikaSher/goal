@@ -5,7 +5,7 @@ import { TimeLine } from "./timeLine";
 import { ShowDescription } from "./showDescription";
 import { GoalTrackers } from "./trackers/list";
 import { IFullGoalInfo } from "@/app/goal/[goalId]/page";
-import { CellDaysInWeek } from "./cellDaysInWeek";
+import { CellDaysInWeek } from "./daysInWeek/cellDaysInWeek";
 
 export const DisplayFullGoal = function ({ goal }: { goal: IFullGoalInfo }) {
   const [isClicked, setIsClicked] = useState(false);
@@ -18,7 +18,7 @@ export const DisplayFullGoal = function ({ goal }: { goal: IFullGoalInfo }) {
 
       <TimeLine timePeriods={goal.timePeriods} />
       <CellDaysInWeek dates={goal.dates} />
-      <ShowDescription descriptionText={goal.description} />
+      {/* <ShowDescription descriptionText={goal.description} /> */}
     </div>
   );
 };

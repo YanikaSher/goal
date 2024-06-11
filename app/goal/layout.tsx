@@ -7,7 +7,7 @@ export default function ProfileLayout({
 }) {
   return (
     <PrivateRoute>
-      <section className="flex flex-col gap-4 md:py-3 w-full">{children}</section>
+      <section className="flex flex-col gap-4 md:py-3 w-full h-max">{children}</section>
     </PrivateRoute>
   );
 }

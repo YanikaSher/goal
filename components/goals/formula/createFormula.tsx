@@ -1,12 +1,11 @@
 "use client";
 
-import { Button } from "@nextui-org/react";
-import { PopupWithConstantsForTheFormula } from "./constants";
+import { PopupWithConstants } from "../trackers/constantsPopup";
 import { useState } from "react";
 import { useParams } from "next/navigation";
-import { calculateFormula } from "./convert/calculateFormula";
-import { creatingConstants } from "./convert/creatingConstants";
-import { now } from "moment";
+import { FormulaList } from "./formulaList";
+import {Button, useDisclosure} from "@nextui-org/react";
+import { InputFormulaNameModal } from "./inputFormulaNameModal";
 
 const operators = {
   plus: "+",
@@ -18,15 +17,8 @@ const operators = {
 };
 
 export function CreateTrackerFormula() {
-  const [formula, setFormula] = useState<{ f: string; id: string }[] | any[]>(
-    []
-  );
-  const params = useParams<{ goalId: string }>();
-  const [formulaValues, setFormulaValues] = useState<string[] | any[]>([]);
-  useState<string[] | any[]>([]);
-
-  const [isRoundBracketsOpen, setIsRoundBracketsOpen] =
-    useState<boolean>(false);
+  
+  const [formulaValues, setFormulaValues] = useState<any[] | string[]>([]);
   function handleClick(event: any) {
     const targetCell = event.target as HTMLElement;
     const dataValueTargetCell = targetCell.getAttribute("data-value");
@@ -74,12 +66,13 @@ export function CreateTrackerFormula() {
   }
 
   return (
-    <div className="flex flex-col w-full">
-      <h2 className="mb-3">Создайте формулу </h2>
-      <div className="flex w-full">
-        <div className="part-1-table-for-creating-formula w-1/2 flex flex-col justify-center border-1 border-zinc-600 rounded-none">
-          <div className="pl-2 flex w-full min-h-10">
-            <div className="w-10/12">
+    <div className="flex flex-col w-full h-full gap-3">
+      <h2 className="text-xl">Создайте формулу </h2>
+      <PopupWithConstants />
+      <div className="flex flex-col w-full sm:flex-row h-96 sm:h-60">
+        <div className="part-1-table-for-creating-formula sm:w-1/2  h-1/2 sm:h-full flex flex-col justify-center border-1 border-zinc-600 rounded-none">
+          <div className="pl-2 flex h-2/6 w-full min-h-10">
+            <div className="flex w-10/12">
               {formulaValues.length === 0
                 ? null
                 : formulaValues.map((value: string, index) => (
@@ -95,7 +88,7 @@ export function CreateTrackerFormula() {
               Delete
             </Button>
           </div>
-          <table className="ctf-button-group_calculate-panel w-full">
+          <table className="ctf-button-group_calculate-panel w-full h-3/6">
             <tr
               onClick={handleClick}
               className="*:border-1 w-1/4 text-center align-middle *:hover:bg-zinc-600 justify-center *:border-zinc-600 rounded-md *:p1"
@@ -133,69 +126,10 @@ export function CreateTrackerFormula() {
               <td data-value={")"}>{")"}</td>
             </tr>
           </table>
-          <Button
-            color="primary"
-            className="w-full rounded-none"
-            onClick={() => {
-              const sentence = formulaValues.join(" ");
-              const url = "http://localhost:5000/api/create/formula";
-              const options = {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  goalId: params.goalId,
-                  formula: sentence,
-                }),
-              };
-              fetch(url, options)
-                .then((response) => response.json())
-                .then((data) => {
-                  const constants = creatingConstants(data.dates);
-                  const expression = calculateFormula(formulaValues, constants);
-                  console.log(expression);
-                  console.log(data);
-                  setFormula(data.formula);
-                });
-            }}
-          >
-            Create
-          </Button>
+          
+          <InputFormulaNameModal formulaValues={formulaValues} />
         </div>
-        <div className="part-2-list-of-formula flex w-1/2 px-2 flex-wrap justify-start gap-5 content-between">
-          {formula.map((formula) => (
-            <div key={formula.id} className="formula-list flex h-10">
-              <p className="formula-string">{formula.f}</p>
-              <button
-                type="button"
-                onClick={() => {
-                  const url = "http://localhost:5000/api/delete/formula";
-                  const options = {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      goalId: params.goalId,
-                      formulaId: formula.id,
-                    }),
-                  };
-                  fetch(url, options)
-                    .then((response) => {
-                      return response.json();
-                    })
-                    .then((data) => {
-                      console.log(data);
-                    });
-                }}
-                className="w-10 h-10 text-xl border-1 border-red-600"
-              >
-                {"x"}
-              </button>
-            </div>
-          ))}
-        </div>
+        <FormulaList />
       </div>
     </div>
   );

@@ -91,7 +91,7 @@ export const TimeLine = function ({ timePeriods }: { timePeriods: any[] }) {
               timePeriods.map((period) =>
                 getTimePlace(time, period.endPeriod) ? (
                   <div
-                    className="bg-sky-500/30 w-full h-full flex justify-center"
+                    className="w-full h-full flex justify-center"
                     key={time}
                   >
                     {"|"}

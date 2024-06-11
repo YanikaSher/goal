@@ -11,7 +11,7 @@ export const DisplayLessGoal = function ({ goal }: { goal: ILessGoalInfo }) {
     isClicked ? setIsClicked(false) : setIsClicked(true);
   }
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full h-5/6">
      
 
       <ShowDescription descriptionText={goal.description} />

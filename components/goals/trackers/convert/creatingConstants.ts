@@ -79,6 +79,8 @@ function getPastDays(
   if (pastDays > 0) {
     console.log(startDay);
     return pastDays;
+  } else {
+    return 0;
   }
 }
 
@@ -96,6 +98,8 @@ function getRemainingDays(
   console.log(remainingDays);
   if (remainingDays > 0) {
     return remainingDays;
+  } else {
+    return 0;
   }
 }
 

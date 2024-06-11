@@ -1,7 +1,7 @@
 "use client";
 
 import { Input, Select, SelectItem } from "@nextui-org/react";
-import { CreateTrackerFormula } from "./createFormula";
+import { CreateTrackerFormula } from "../formula/createFormula";
 
 export function SelectTrackerFormula() {
   return (
