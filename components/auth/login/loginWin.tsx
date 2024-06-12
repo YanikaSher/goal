@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Modal,
   ModalContent,
@@ -13,53 +15,47 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { MailIcon, LockIcon } from "@/components/icons";
 import { validateEmail } from "./validation";
-import { useAppDispatch } from "@/redux/hooks";
-import { setup } from "@/redux/features/auth/loginSuccessful";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectLoginSuccessful, setup } from "@/redux/features/auth/loginSuccessful";
 import Cookies from "js-cookie";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { login } from "./requests";
 
 export function LoginWin() {
+  const some = useAppSelector(selectLoginSuccessful)
   const dispatch = useAppDispatch();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [userErrorInfo, setUserErrorInfo] = useState("");
-  const router = useRouter();
-  function signInHandleClick(event: React.FormEvent<HTMLFormElement>) {
-    event?.preventDefault();
-    fetch("http://localhost:5000/api/auth/login", {
-      credentials: "include",
-      method: "POST",
-      headers: {
-        "User-Agent": navigator.userAgent,
-        "Accept-Language": navigator.language,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: email, password: password }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          dispatch(setup(true));
-          return response.json();
-        } else if (response.status >= 400) {
-          return false;
-        }
-      })
-      .then((data) => {
-        if (!data) {
-          setUserErrorInfo(data.message);
-        } else {
-          const sid = Cookies.get("connect.sid");
-          sid
-            ? window.localStorage.setItem("sid", sid)
-            : console.log("кука не установилась");
-        }
-      });
-  }
-  const isInvalidEmail = useMemo(() => {
-    return validateEmail(email);
-  }, [email]);
 
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: login,
+    onSuccess: (data) => {
+      if (data.message) {
+        setUserErrorInfo(data?.message);
+      }
+      if (data.key && data.key === "reregistration") {
+        dispatch(setup(false));
+      }
+      if (data.key && data.key === "success") {
+        dispatch(setup(true));
+        console.log(some)
+      }
+      console.log(some)
+      queryClient.invalidateQueries({ queryKey: ["login"] });
+      const sid = Cookies.get("connect.sid");
+      sid ? window.localStorage.setItem("connect.sid", sid) : null;
+    },
+  });
   return (
-    <form onSubmit={signInHandleClick}>
+    <form
+      onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        mutation.mutate({ email: email, password: password });
+      }}
+    >
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">Вход</ModalHeader>
         <ModalBody>
@@ -75,7 +71,7 @@ export function LoginWin() {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               setEmail(event.target.value)
             }
-            color={isInvalidEmail ? "primary" : "warning"}
+            color={validateEmail(email) ? "primary" : "warning"}
           />
           <Input
             endContent={

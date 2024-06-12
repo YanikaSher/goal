@@ -2,9 +2,8 @@
 
 import { PopupWithConstants } from "../constantsPopup";
 import { useState } from "react";
-import { useParams } from "next/navigation";
 import { FormulaList } from "./formulaList";
-import {Button, useDisclosure} from "@nextui-org/react";
+import {Button} from "@nextui-org/react";
 import { InputFormulaNameModal } from "./inputFormulaNameModal";
 
 const operators = {

@@ -1,15 +1,8 @@
-import { Button } from "@nextui-org/button";
 import {
   ModalContent,
-  ModalHeader,
   ModalBody,
-  ModalFooter,
 } from "@nextui-org/modal";
-import { Checkbox } from "@nextui-org/react";
 import Link from "next/link";
-import Image from "next/image";
-import { Input } from "postcss";
-import { MailIcon, LockIcon } from "../../icons";
 import { useRouter } from "next/navigation";
 
 export const SuccessLoginWin = () => {
