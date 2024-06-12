@@ -1,7 +1,11 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { calculateWeek, getCurrentWeekArr } from "./calculateWeek";
+import {
+  calculateWeek,
+  convertIndexToDayOfWeek,
+  getCurrentWeekArr,
+} from "./calculateWeek";
 
 export function CellDaysInWeek({
   dates,
@@ -10,9 +14,9 @@ export function CellDaysInWeek({
 }) {
   const params = useParams<{ goalId: string }>();
   const periodOfCurrentWeek = calculateWeek();
-  console.log(periodOfCurrentWeek)
+  console.log(periodOfCurrentWeek);
   const currentWeek = getCurrentWeekArr(dates, periodOfCurrentWeek);
-  console.log(currentWeek)
+  console.log(currentWeek);
   return (
     <div>
       <div className="flex justify-center flex-wrap my-5 ">
@@ -22,7 +26,10 @@ export function CellDaysInWeek({
             key={date.index}
           >
             <p className="dc-tracker-name border-b-2 text-center w-full">
-              {date.date}
+              {date.date}{" "}
+              <b className="text-green-600">
+                {convertIndexToDayOfWeek(date.index)}
+              </b>
             </p>
             <ul>
               {date.completedTrackers.map(
@@ -44,14 +51,6 @@ export function CellDaysInWeek({
             </ul>
           </div>
         ))}
-        <button
-          type="button"
-          onClick={() => {
-            calculateWeek();
-          }}
-        >
-          CLICK
-        </button>
       </div>
     </div>
   );

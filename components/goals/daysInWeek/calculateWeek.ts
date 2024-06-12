@@ -76,3 +76,27 @@ function convertArrDayOfWeekToObjectOfMoments(arrOfCurrentWeek: any[]) {
     sun: moment(arrOfCurrentWeek[6].date, formatForDate).startOf("day"),
   };
 }
+
+export function convertIndexToDayOfWeek(index: number) {
+  if (index === 0) {
+    return "mon";
+  }
+  if (index === 1) {
+    return "tues";
+  }
+  if (index === 2) {
+    return "wed";
+  }
+  if (index === 3) {
+    return "thurs";
+  }
+  if (index === 4) {
+    return "fri";
+  }
+  if (index === 5) {
+    return "sat";
+  }
+  if (index === 6) {
+    return "sun";
+  }
+}
