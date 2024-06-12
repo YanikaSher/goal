@@ -1,39 +1,15 @@
 import moment from "moment";
-import { getTimePlace } from "./convertTime";
+import { getMatchingColor, getTimePlace, storeTimePeriodsColors } from "./convertTime";
+import { arrOf24hours, time } from "./consts";
 
-const time = [
-  "00:00",
-  "01:00",
-  "02:00",
-  "03:00",
-  "04:00",
-  "05:00",
-  "06:00",
-  "07:00",
-  "08:00",
-  "09:00",
-  "10:00",
-  "11:00",
-  "12:00",
-  "13:00",
-  "14:00",
-  "15:00",
-  "16:00",
-  "17:00",
-  "18:00",
-  "19:00",
-  "20:00",
-  "21:00",
-  "22:00",
-  "23:00",
-];
 export const TimeLine = function ({ timePeriods }: { timePeriods: any[] }) {
+  storeTimePeriodsColors(timePeriods);
   return (
     <div className="flex flex-col">
-      <div className="flex">
-        {time.map((time: string, index: number) => (
+      <div className="some flex">
+        {arrOf24hours.map((time: string, index: number) => (
           <div
-            className="flex justify-center items-center h-8"
+            className="flex justify-center items-center h-8 border-1 border-zinc-300 dark:border-zinc-800"
             style={{
               width: `4.16%`,
             }}
@@ -46,17 +22,17 @@ export const TimeLine = function ({ timePeriods }: { timePeriods: any[] }) {
       <div className="flex rounded-md ">
         {time.map((time: string, index: number) => (
           <div
-            className="flex justify-center border-1 border-zinc-300 dark:border-zinc-800 items-center h-8"
+            className="flex justify-center border-1 border-zinc-300 dark:border-zinc-800 items-center h-4 md:h-6"
             style={{
-              width: `4.16%`,
+              width: `2.08%`,
             }}
             key={index}
           >
             {timePeriods &&
               timePeriods.map((period) =>
                 getTimePlace(time, period.startPeriod) ? (
-                  <div key={time}>{"|"}</div>
-                ) : null
+                  <div key={time} style={{backgroundColor: getMatchingColor(period)}} className="h-full w-full"></div>
+                ) : null 
               )}
           </div>
         ))}
@@ -64,16 +40,14 @@ export const TimeLine = function ({ timePeriods }: { timePeriods: any[] }) {
       <div className="flex">
         {time.map((time: string, index: number) => (
           <div
-            className="flex justify-center border-1 border-zinc-300 dark:border-zinc-800 items-center h-8"
+            className="flex justify-center border-1 border-zinc-300 dark:border-zinc-800 items-center h-4 md:h-6"
             style={{
-              width: `4.16%`,
+              width: `2.08%`,
             }}
             key={index}
           >
             {getTimePlace(time, moment().format("HH:mm")) ? (
-              <div className=" text-red-600" key={time}>
-                {"|"}
-              </div>
+              <div className=" border-red-500 border-2 h-full w-full " key={time}></div>
             ) : null}
           </div>
         ))}
@@ -81,9 +55,9 @@ export const TimeLine = function ({ timePeriods }: { timePeriods: any[] }) {
       <div className="flex">
         {time.map((time: string, index: number) => (
           <div
-            className="flex justify-center border-1 border-zinc-300 dark:border-zinc-800 items-center h-8"
+            className="flex justify-center border-1 border-zinc-300 dark:border-zinc-800 items-center h-4 md:h-6"
             style={{
-              width: `4.16%`,
+              width: `2.08%`,
             }}
             key={index}
           >
@@ -91,11 +65,10 @@ export const TimeLine = function ({ timePeriods }: { timePeriods: any[] }) {
               timePeriods.map((period) =>
                 getTimePlace(time, period.endPeriod) ? (
                   <div
+                  style={{backgroundColor: getMatchingColor(period)}} 
                     className="w-full h-full flex justify-center"
                     key={time}
-                  >
-                    {"|"}
-                  </div>
+                  ></div>
                 ) : null
               )}
           </div>

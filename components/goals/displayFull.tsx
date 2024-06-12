@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { TimeLine } from "./timeLine";
+import { TimeLine } from "./timeLine/timeLine";
 import { ShowDescription } from "./showDescription";
 import { GoalTrackers } from "./trackers/list";
 import { IFullGoalInfo } from "@/app/goal/[goalId]/page";

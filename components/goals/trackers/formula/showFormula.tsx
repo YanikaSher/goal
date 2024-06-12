@@ -1,7 +1,7 @@
 "use client";
 
-import { creatingConstants } from "../trackers/convert/creatingConstants";
-import { calculateFormula } from "../trackers/convert/calculateFormula";
+import { creatingConstants } from "../convert/creatingConstants";
+import { calculateFormula } from "../convert/calculateFormula";
 
 export function ShowFormula({ goal }: any) {
   const constants = creatingConstants(goal.dates);

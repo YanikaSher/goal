@@ -1,6 +1,5 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import {
   calculateWeek,
   convertIndexToDayOfWeek,
@@ -12,11 +11,8 @@ export function CellDaysInWeek({
 }: {
   dates: { date: string; id: string; completedTrackers: [] }[];
 }) {
-  const params = useParams<{ goalId: string }>();
   const periodOfCurrentWeek = calculateWeek();
-  console.log(periodOfCurrentWeek);
   const currentWeek = getCurrentWeekArr(dates, periodOfCurrentWeek);
-  console.log(currentWeek);
   return (
     <div>
       <div className="flex justify-center flex-wrap my-5 ">

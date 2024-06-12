@@ -14,7 +14,7 @@ export const pieChartSlice = createSlice({
   reducers: {
     setupPeriod: (
       state,
-      action: PayloadAction<{ startPeriod: string; endPeriod: string }>
+      action: PayloadAction<{ startPeriod: string; endPeriod: string, }>
     ) => {
       state.periods.push(action.payload);
     },

@@ -9,10 +9,10 @@ export function calculateFormula(strFormula: string, constants: any) {
     }
   }
   const stringFormula = newArrFormula.join(" ");
-  try {
-    const expression = evaluate(stringFormula);
+  const expression = evaluate(stringFormula);
+  if (Number.isNaN(expression)) {
+    return "not calculated";
+  } else {
     return expression.toFixed(1);
-  } catch (error) {
-    console.log(error);
   }
 }

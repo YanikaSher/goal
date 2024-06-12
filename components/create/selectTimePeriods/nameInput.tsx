@@ -15,11 +15,10 @@ export function NameInput() {
       type="text"
       onChange={(event: any) => {
         const inputName = event.target.value;
-        const emptyName = ''
+        const emptyName = "";
         if (isNameEmpty(inputName)) {
           setErrorMessage("Веденное вами значение является пустой строкой");
           dispatch(setPeriodName(emptyName));
-
         } else {
           dispatch(setPeriodName(inputName));
         }

@@ -1,6 +1,7 @@
 "use client";
 import { RootState } from "@/redux/store";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+const uuid = require("uuid").v4;
 
 const initialState = {
   startPeriod: "",
@@ -24,12 +25,12 @@ export const periodSlice = createSlice({
       state.name = strWithoutSpaces;
     },
     setPeriodId: (state, action: PayloadAction<string>) => {
-      state.id = action.payload;
+      state.id = uuid();
     },
   },
 });
 
-export const { setStartPeriod, setEndPeriod, setPeriodName,setPeriodId } =
+export const { setStartPeriod, setEndPeriod, setPeriodName, setPeriodId } =
   periodSlice.actions;
 export const selectorPeriod = (state: RootState) => state.period;
 export default periodSlice.reducer;

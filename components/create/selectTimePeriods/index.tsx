@@ -11,6 +11,7 @@ import { selectorPeriod, setPeriodId } from "@/redux/features/period/period";
 import { EndInput } from "./endInput";
 import { isPeriodCompleted } from "./handleAddBtn";
 import { NameInput } from "./nameInput";
+import { Button } from "@nextui-org/button";
 const uuid = require("uuid").v4;
 
 export const SelectTimePeriods = () => {
@@ -34,8 +35,10 @@ export const SelectTimePeriods = () => {
             <EndInput></EndInput>
           </div>
 
-          <button
-            type="button"
+          <Button
+          color="primary"
+          variant="flat"
+          size="md"
             onClick={() => {
               if (isPeriodCompleted(period, periods)) {
                 const periodId: string = uuid();
@@ -44,10 +47,10 @@ export const SelectTimePeriods = () => {
                 dispatch(setupPeriod(period));
               }
             }}
-            className="px-3 rounded border-2 border-lime-500/40 h-10 bg-lime-400/40 hover:bg-lime-400/20 "
+            className="w-full rounded text-md"
           >
             Добавить
-          </button>
+          </Button>
           <button
             type="button"
             onClick={() => {
@@ -59,7 +62,7 @@ export const SelectTimePeriods = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center rounded h-36 p-3 overflow-y-auto dark:bg-sky-600/10 dark:shadow-zinc-950 shadow-sky-700/40 shadow-[inset_0px_0px_10px_0px_rgba(0,0,0,0.3)] bg-sky-800/10">
+      <div className="flex flex-col justify-center items-center rounded h-36 p-3 overflow-y-auto dark:bg-sky-600/10 bg-sky-800/10">
         {periods.map((period) => (
           <div key={period.id} className="m">
             {period.startPeriod}:{period.endPeriod}

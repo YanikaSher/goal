@@ -13,8 +13,8 @@ export function StartInput() {
 
   return (
     <div className="flex">
-      <label className="rounded h-10 w-24 p-1 border-2" htmlFor="start-time">
-        Start time:
+      <label className="rounded h-10 w-24 p-1 border-2 dark:border-1 dark:border-zinc-700" htmlFor="start-time">
+        Start:
       </label>
       <input
         name="start-time"

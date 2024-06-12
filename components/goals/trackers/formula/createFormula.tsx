@@ -1,6 +1,6 @@
 "use client";
 
-import { PopupWithConstants } from "../trackers/constantsPopup";
+import { PopupWithConstants } from "../constantsPopup";
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { FormulaList } from "./formulaList";
@@ -70,8 +70,8 @@ export function CreateTrackerFormula() {
       <h2 className="text-xl">Создайте формулу </h2>
       <PopupWithConstants />
       <div className="flex flex-col w-full sm:flex-row h-96 sm:h-60">
-        <div className="part-1-table-for-creating-formula sm:w-1/2  h-1/2 sm:h-full flex flex-col justify-center border-1 border-zinc-600 rounded-none">
-          <div className="pl-2 flex h-2/6 w-full min-h-10">
+        <div className="part-1-table-for-creating-formula sm:w-1/2 h-1/2 sm:h-full flex flex-col justify-center rounded-none">
+          <div className="pl-2 flex h-2/6 w-full min-h-10 border-2 border-b-0 dark:border-zinc-600 border-zinc-300 ">
             <div className="flex w-10/12">
               {formulaValues.length === 0
                 ? null
@@ -91,39 +91,39 @@ export function CreateTrackerFormula() {
           <table className="ctf-button-group_calculate-panel w-full h-3/6">
             <tr
               onClick={handleClick}
-              className="*:border-1 w-1/4 text-center align-middle *:hover:bg-zinc-600 justify-center *:border-zinc-600 rounded-md *:p1"
+              className="*:border-2 w-1/4 text-center align-middle *:border-zinc-300 rounded-md *:p1"
             >
-              <td data-value={"chars"}>chars</td>
-              <td className="" data-value={"nums"}>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={"chars"}>chars</td>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={"nums"}>
                 nums
               </td>
-              <td data-value={"pastD"}>pastD</td>
-              <td data-value={"remD"}>remD</td>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={"pastD"}>pastD</td>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={"remD"}>remD</td>
             </tr>
             <tr
               onClick={handleClick}
-              className="*:border-1 w-1/4 text-center align-middle *:hover:bg-zinc-600 justify-center *:border-zinc-600 rounded-md *:p1"
+              className="*:border-2 w-1/4 text-center align-middle *:border-zinc-300 rounded-md *:p1"
             >
               <td data-value={"qt"}>qt</td>
-              <td data-value={"qn"}>qn</td>
-              <td data-value={"qb"}>qb</td>
-              <td data-value={"allDays"}>allDays</td>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={"qn"}>qn</td>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={"qb"}>qb</td>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={"allDays"}>allDays</td>
             </tr>
             <tr
               onClick={handleClick}
-              className="*:border-1 w-1/4 text-center align-middle *:hover:bg-zinc-600 justify-center *:border-zinc-600 rounded-md *:p1"
+              className="*:border-2 w-1/4 text-center align-middle *:border-zinc-300 rounded-md *:p1"
             >
-              <td data-value={"+"}>+</td>
-              <td data-value={"-"}>-</td>
-              <td data-value={"/"}>/</td>
-              <td data-value={"*"}>*</td>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={"+"}>+</td>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={"-"}>-</td>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={"/"}>/</td>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={"*"}>*</td>
             </tr>
             <tr
               onClick={handleClick}
-              className="*:border-1 w-1/4 text-center align-middle *:hover:bg-zinc-600 justify-center *:border-zinc-600 rounded-md *:p1"
+              className="*:border-2 w-1/4 text-center align-middle *:border-zinc-300 rounded-md *:p1"
             >
-              <td data-value={"("}>{"("}</td>
-              <td data-value={")"}>{")"}</td>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={"("}>{"("}</td>
+              <td className=" hover:bg-zinc-300 dark:hover:bg-zinc-600 dark:border-zinc-600" data-value={")"}>{")"}</td>
             </tr>
           </table>
           

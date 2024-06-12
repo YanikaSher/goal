@@ -6,7 +6,6 @@ export function calculateWeek() {
   const startWeek = now.startOf("isoWeek");
   const endWeek = moment(startWeek).endOf("isoWeek"); // Используем moment(startWeek)
   const some = getWeekArray(now, endWeek);
-  console.log(some);
   return some;
 }
 function getWeekArray(

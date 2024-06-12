@@ -15,8 +15,8 @@ import { useEffect, useState } from "react";
 import { getGoal } from "./getGoal";
 import { isOwnerSelector, setIsOwner } from "@/redux/features/goal/isOwner";
 import { GoalTrackers } from "@/components/goals/trackers/list";
-import { GoalTools } from "@/components/goals/formula/tools";
-import { ShowFormula } from "@/components/goals/formula/showFormula";
+import { GoalTools } from "@/components/goals/trackers/formula/tools";
+import { ShowFormula } from "@/components/goals/trackers/formula/showFormula";
 
 export interface ILessGoalInfo {
   goalName: string;

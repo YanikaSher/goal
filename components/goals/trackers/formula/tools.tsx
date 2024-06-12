@@ -9,7 +9,7 @@ import {
 } from "@nextui-org/react";
 import moment from "moment";
 import { ChangeEvent, useState } from "react";
-import { SelectTrackerFormula } from "../formula/selectFormula";
+import { SelectTrackerFormula } from "./selectFormula";
 
 export function GoalTools({
   dates,
