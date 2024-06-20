@@ -34,6 +34,5 @@ export async function getProfile(
   };
   const response = await fetch(url, options);
   const data = await response.json();
-  console.log('the query motherfucker')
   return data;
 }

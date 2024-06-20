@@ -16,8 +16,15 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
     if (!query.data.isAuth) {
       router.push("/signin");
     }
-    console.log(query.data.isAuth)
     return <>{children}</>;
+  }
+  if (query.isError) {
+    return (
+      <div>
+        <h2>Ошибка при запросе</h2>
+        <h2>Перезагрузите страницу</h2>
+      </div>
+    );
   }
 }
 export default PrivateRoute;

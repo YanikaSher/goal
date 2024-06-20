@@ -1,4 +1,4 @@
-import { add } from "@/redux/features/hashtag/hashtagSlice";
+import { add } from "@/redux/features/hashtag/hashtagsSlice";
 import { AppDispatch } from "@/redux/store";
 
 export const validationAndSetupNewHashtag = (

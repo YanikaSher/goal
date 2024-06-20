@@ -1,12 +1,11 @@
-'use client'
+"use client";
 
-import { useAppSelector } from "@/redux/hooks";
+import Cookies from "js-cookie";
 import { LoginWin } from "./loginWin";
 import { SuccessLoginWin } from "./successLoginWin";
-import { selectLoginSuccessful } from "@/redux/features/auth/loginSuccessful";
+import { session_id_name } from "@/config/globalConsts";
 
 export const ModalLogin = () => {
-  const isLoginSuccessful = useAppSelector(selectLoginSuccessful);
-  console.log(isLoginSuccessful)
-  return <div>{isLoginSuccessful ? <SuccessLoginWin /> : <LoginWin />}</div>;
+  const session = Cookies.get(session_id_name);
+    return <div>{session ? <SuccessLoginWin /> : <LoginWin />}</div>;
 };

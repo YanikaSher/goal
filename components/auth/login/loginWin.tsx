@@ -11,19 +11,14 @@ import {
   Input,
   Link,
 } from "@nextui-org/react";
-import { useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { MailIcon, LockIcon } from "@/components/icons";
-import { validateEmail } from "./validation";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectLoginSuccessful, setup } from "@/redux/features/auth/loginSuccessful";
+import { validateEmail } from "../validation";
 import Cookies from "js-cookie";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { login } from "./requests";
 
 export function LoginWin() {
-  const some = useAppSelector(selectLoginSuccessful)
-  const dispatch = useAppDispatch();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [userErrorInfo, setUserErrorInfo] = useState("");
@@ -36,17 +31,11 @@ export function LoginWin() {
       if (data.message) {
         setUserErrorInfo(data?.message);
       }
-      if (data.key && data.key === "reregistration") {
-        dispatch(setup(false));
-      }
-      if (data.key && data.key === "success") {
-        dispatch(setup(true));
-        console.log(some)
-      }
-      console.log(some)
+
       queryClient.invalidateQueries({ queryKey: ["login"] });
       const sid = Cookies.get("connect.sid");
       sid ? window.localStorage.setItem("connect.sid", sid) : null;
+      location.reload();
     },
   });
   return (

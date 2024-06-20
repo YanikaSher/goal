@@ -1,4 +1,4 @@
-import { add, del, selectHashtag } from "@/redux/features/hashtag/hashtagSlice";
+import { add, del, selectHashtag } from "@/redux/features/hashtag/hashtagsSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useState } from "react";
 import { validationAndSetupNewHashtag } from "./validationAndSetupNewHashtag";

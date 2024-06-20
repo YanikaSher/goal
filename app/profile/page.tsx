@@ -11,9 +11,7 @@ export default function Page() {
   const {
     data: userData,
     isLoading,
-    isError,
     isSuccess,
-    isFetched,
   } = useQuery<any>({
     queryKey: ["defaultProfile"],
     queryFn: async function () {

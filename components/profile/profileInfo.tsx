@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
-import png from "@/public/images/person-png-icon.png";
+// import png from "@/public/images/person-png-icon.png";
 import { ModulesList } from "./modulesList";
 export const ProfileInfo = function ({ profileData }: { profileData: IUser }) {
   return (
     <div className="pi-profile-base-info flex flex-col mb-4 sm:flex-row">
       <div className="pi-profile-avatar w-1/2 lg:w-1/3">
         <Image
-          src={png}
+          src={'/'}
           alt="avatar"
           className="border-3 dark:border-zinc-700 border-zinc-400 rounded-2xl"
           width={300}
